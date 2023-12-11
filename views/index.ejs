@@ -1,0 +1,23 @@
+<% include ./partials/header.ejs %>
+<div class="w-full h-screen bg-zinc-100 flex items-center justify-center">
+  <div class="w-64 h-[70vh] bg-white rounded-lg px-4 py-4">
+    <h1 class="text-3xl text-center leading-none mb-3 tracking-tighter">Welcome to pintrest.</h1>
+    <form action="/login" method="post">
+      <input class="block mt-3 w-full px-3 py-2 "  type="username" name="username" placeholder="username">
+      <input class="blcok mt-3 w-full px-3 py-2"  type="password" name="password" placeholder="password">
+      <a class="inline-block mt-2 text-zinc-500 font-semibold"href="#">Forgot password ?</a>
+      <input class="block mt-3 w-full px-3 py-2 bg-red-600 rounded-lg text-white" type="submit">
+      <p class=" font-semibold text-zinc-700 mt-6  text-center leading-none">By continuing you agree to pintrest term of servise </p>
+    </form>
+    <a class="inline-block mt-4 text-sm font-semibold w-full text-center" href="/register">Dont have acconut</a>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<% include ./partials/footer.ejs %>
