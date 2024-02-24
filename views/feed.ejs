@@ -10,7 +10,8 @@
                   <%= elem.title %>
                 </h3>
                 <h3 class="mt-2 text-sm">
-                  <%=user.username %>
+                  <!-- Link to show all posts by this user -->
+                  <a href="/user/posts/<%= elem.user._id %>">Chek all Post:<span class="text-red-400"><%= elem.user.username %></span></a>
                 </h3>
             </div>
         <% }) %>

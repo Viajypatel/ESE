@@ -1,27 +1,48 @@
 <% include ./partials/header.ejs %>
 <div class="w-full h-screen bg-zinc-100 flex items-center justify-center">
   <div class="w-70 h-[84vh] bg-white rounded-lg px-8 py-8">
-    <h1 class="text-3xl text-center leading-none mb-3 tracking-tighter">Create New account</h1>
-    <form action="/register" method="post">
-      <input class=" border-2 block mt-3 w-full px-3 py-2 "  type="username" name="username" placeholder="username">
-      <input class=" border-2 block mt-3 w-full px-3 py-2 "  type="fullname" name="fullname" placeholder="fullname">
-      <input class=" border-2 blcok mt-3 w-full px-3 py-2"  type="password" name="password" placeholder="password">
-      <input class=" border-2 block mt-3 w-full px-3 py-2 "  type="email" name="email" placeholder="email">
-      <input class="border-2 block mt-3 w-full px-3 py-2 "  type="number" name="contact" placeholder="contact">
-      <input class="block mt-3 w-full px-3 py-2 bg-red-600 rounded-lg text-white" type="submit">
-      <p class=" font-semibold text-zinc-700 mt-6  text-center leading-none">By continuing you agree to pintrest term of servise </p>
+    <h1 class="text-3xl text-center leading-none mb-3 tracking-tighter">Create New Account</h1>
+    <form id="registrationForm" action="/register" method="post">
+      <input class="border-2 block mt-3 w-full px-3 py-1" type="text" name="username" placeholder="Username" required>
+      <input class="border-2 block mt-3 w-full px-3 py-1" type="text" name="fullname" placeholder="Full Name" required>
+      <input class="border-2 block mt-3 w-full px-3 py-1" type="password" name="password" placeholder="Password" required>
+      <input class="border-2 block mt-3 w-full px-3 py-1" type="email" name="email" id="email" placeholder="Email" required>
+      <span id="emailError" class="text-red-600 hidden">Invalid email address</span>
+      <input class="border-2 block mt-3 w-full px-3 py-1" type="tel" name="contact" id="contact" placeholder="Contact" required>
+      <span id="contactError" class="text-red-600 hidden">Invalid mobile number</span>
+      <input class="block mt-3 w-full px-3 py-2 bg-red-600 rounded-lg text-white" type="submit" value="Register">
+      <p class="font-semibold text-zinc-700 mt-6 text-center leading-none">By continuing, you agree to Pinterest's terms of service.</p>
     </form>
-    <a class="inline-block mt-4 text-sm font-semibold w-full text-center" href="/">Already have acconut</a>
+    <a class="inline-block mt-4 text-sm font-semibold w-full text-center text-red-600" href="/">Already have an account</a>
   </div>
 </div>
-<% include ./partials/header.ejs %>
+<script>
+document.getElementById('registrationForm').addEventListener('submit', function(event) {
+  // Validate email
+  var email = document.getElementById('email').value;
+  var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(email)) {
+    document.getElementById('emailError').classList.remove('hidden');
+    event.preventDefault(); // Prevent form submission
+  } else {
+    document.getElementById('emailError').classList.add('hidden');
+  }
+
+  // Validate mobile number
+  var contact = document.getElementById('contact').value;
+  var contactPattern = /^\d{10}$/; // Assuming 10-digit mobile number
+  if (!contactPattern.test(contact)) {
+    document.getElementById('contactError').classList.remove('hidden');
+    event.preventDefault(); // Prevent form submission
+  } else {
+    document.getElementById('contactError').classList.add('hidden');
+  }
+});
 
 
-
-
-
-
-
+</script>
 <% include ./partials/footer.ejs %>
 
-<% include ./partials/footer.ejs %>
+
+
+

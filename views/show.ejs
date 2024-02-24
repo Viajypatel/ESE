@@ -1,6 +1,7 @@
 <% include ./partials/header.ejs %>
 <div class="w-full h-screen bg-zinc-800 text-white">
-    <div class="cards flex flex-wrap gap-10">
+    <h2 class="mb-3 font-bold">Post by:<%=user.fullname %></h2>
+  <div class="cards flex flex-wrap gap-10">
         <% user.posts.forEach(function(elem){ %>
             <div class="card w-36">
                 <div class="w-full h-40 bg-sky-200 rounded-lg overflow-hidden">
@@ -12,6 +13,10 @@
                 <h3 class="mt-2 text-sm">
                   <%=user.username %>
                 </h3>
+                 <!-- Delete button/link -->
+                 <form action="/posts/delete/<%= elem.id %>" method="POST">
+                  <button type="submit" class="mt-2 px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700">Delete</button>
+              </form>
             </div>
         <% }) %>
         

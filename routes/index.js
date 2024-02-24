@@ -105,4 +105,49 @@ function isLoggedIn(req, res, next)
   }
   res.redirect("/");
 }
+// Route to delete a post
+router.post('/posts/delete/:postId', isLoggedIn, async function(req, res, next) {
+  try {
+    const postId = req.params.postId;
+    const user = await userModel.findOne({ username: req.session.passport.user });
+
+    // Check if the user owns the post
+    const post = await postModel.findById(postId);
+    if (!post) {
+      return res.status(404).send('Post not found');
+    }
+    if (post.user.toString() !== user._id.toString()) {
+      return res.status(403).send('Unauthorized to delete this post');
+    }
+
+    // Remove the post from the user's posts array
+    const index = user.posts.indexOf(postId);
+    if (index > -1) {
+      user.posts.splice(index, 1);
+      await user.save();
+    }
+
+    // Delete the post from the database
+    await postModel.deleteOne({ _id: postId }); // Or use findOneAndDelete
+
+    res.redirect("/show/posts");
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Route to show all posts by a specific user
+router.get('/user/posts/:userId', async function(req, res, next) {
+  try {
+    const userId = req.params.userId;
+    const user = await userModel.findById(userId).populate('posts');
+    if (!user) {
+      return res.status(404).send('User not found');
+    }
+    res.render('userPosts', { user, nav: true }); // Render the template to display all posts by the user
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
