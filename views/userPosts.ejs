@@ -1,6 +1,6 @@
 <% include ./partials/header.ejs %>
 <div class="w-full h-screen bg-zinc-800 text-white">
-  <h2 class="text-center text-red-400 font-bold text-3xl">Post by <%= user.username %></h2>
+  <h2 class="text-center  font-bold text-3xl">Post by <%= user.username %></h2>
   <div class="cards flex flex-wrap gap-10 mt-2">
     <% user.posts.forEach(function(post){ %>
       <div class="card w-36">
