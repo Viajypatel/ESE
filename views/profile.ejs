@@ -12,8 +12,8 @@
         <img class="h-full w-full object-cover object-center" src="/images/uploads/<%= user.profileImage %>" alt="">
     </div>
     </div>
-    <h1 class="text-2xl font-semibold text-white"><%=user.fullname %></h1>
-    <h3 class="text-md font-semibold"><%=user.username %></h3>
+    <h1 class="text-3xl font-semibold text-white"><%=user.fullname %></h1>
+    <h3 class="text-xl font-semibold"><%=user.username %></h3>
     <!-- //<a href="/edit" class="px-7 py-3 bg-zinc-700 rounded-full text-xs mt-4 font-semibold">EDit</a> -->
     <a href="/add" class="px-4 py-1 rounded-lg bg-red-600 text-lg font-bold mt-4">Add Post</a>
 </div>
@@ -28,7 +28,7 @@
         <% } %>
         
     </div>
-    <a href="/show/posts" class="inline-block text-xl font-semibold mt-2">Show uploaded pin</a>
+    <a href="/show/posts" class="inline-block text-xl font-semibold mt-2">Show All Pin</a>
     <h5 class="text-sm font-semibold opacity-80"><%=user.posts.length %>Pins</h5>
 </div>
 </div>

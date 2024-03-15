@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const plm=require("passport-local-mongoose");
-mongoose.connect("mongodb://127.0.0.1:27017/pintrestbase")
+const dburl = "mongodb+srv://vijaypatel114200:T7hRFvntTqwHE4y4@cluster0.zz20hw5.mongodb.net/Vijaydb";
+mongoose.connect(dburl);
+
 // Create a user schema
 const userSchema =mongoose.Schema({
   username:{

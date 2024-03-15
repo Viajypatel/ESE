@@ -1,5 +1,5 @@
 <% include ./partials/header.ejs %>
-<div class="w-full h-screen bg-zinc-800 text-white">
+<div class="w-full min-h-screen bg-zinc-800 text-white">
   <h2 class="text-center  font-bold text-3xl">Post by <%= user.username %></h2>
   <div class="cards flex flex-wrap gap-10 mt-2">
     <% user.posts.forEach(function(post){ %>
@@ -7,10 +7,10 @@
         <div class="w-full h-40 bg-sky-200 rounded-lg overflow-hidden">
           <img src="/images/uploads/<%= post.image %>" class="w-full h-full object-cover" alt="imgg">
         </div>
-        <h3 class="mt-2 text-sm">
-          <%= post.title %>
+        <h3 class="mt-1 text-md">
+          <span class="text-xl font-bold">Title:</span> <%= post.title %>
         </h3><br/>
-        <p class="text-sm">Desc: <%= post.description %></p>
+        <p class="text-md mt-0"><span class="text-xl font-bold">Desc:</span><%= post.description %></p>
       </div>
     <% }) %>
   </div>
