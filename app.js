@@ -1,23 +1,36 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-const expressSession=require('express-session');
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const expressSession = require('express-session');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
 const passport = require('passport');
-var app = express();
+const MongoStore = require('connect-mongo'); // Import connect-mongo
+const mongoose = require('mongoose'); // Import mongoose
+
+const app = express();
 
 // view engine setup
 app.use(express.static('public'));
-
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+// MongoDB connection setup
+const dburl = "mongodb+srv://vijaypatel114200:T7hRFvntTqwHE4y4@cluster0.zz20hw5.mongodb.net/Vijaydb";
+mongoose.connect(dburl, { useNewUrlParser: true, useUnifiedTopology: true });
+
+// Configure session middleware
 app.use(expressSession({
-  resave:false, 
-  saveUninitialized:false,
-  secret:"hey hi hello"
+  resave: false, 
+  saveUninitialized: false,
+  secret: "hey hi hello",
+  store: new MongoStore({ 
+    mongoUrl: dburl, // Provide the MongoDB URL directly
+    dbName: 'Vijaydb', // Specify the database name
+    mongooseConnection: mongoose.connection, // Provide mongoose connection as client
+  })
 }));
 
 app.use(passport.initialize()); 
