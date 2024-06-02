@@ -1,16 +1,17 @@
 <% include ./partials/header.ejs %>
-<div class="w-full min-h-screen bg-zinc-800 text-white">
-  <h2 class="text-center  font-bold text-3xl">Post by <%= user.username %></h2>
-  <div class="cards flex flex-wrap gap-10 mt-2">
+<div class="w-full min-h-screen bg-gray-900 text-white py-8 px-4">
+  <h2 class="text-center font-bold text-3xl mb-6">Posts by <%= user.username %></h2>
+  <div class="container mx-auto max-w-screen-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
     <% user.posts.forEach(function(post){ %>
-      <div class="card w-36">
-        <div class="w-full h-40 bg-sky-200 rounded-lg overflow-hidden">
-          <img src="/images/uploads/<%= post.image %>" class="w-full h-full object-cover" alt="imgg">
+      <div class="bg-gray-800 rounded-lg shadow-md overflow-hidden">
+        <div class="w-full h-40 md:h-48 overflow-hidden">
+          <img src="/images/uploads/<%= post.image %>" class="w-full h-full object-cover" alt="img">
         </div>
-        <h3 class="mt-1 text-md">
-          <span class="text-xl font-bold">Title:</span> <%= post.title %>
-        </h3><br/>
-        <p class="text-md mt-0"><span class="text-xl font-bold">Desc:</span><%= post.description %></p>
+        <div class="p-4">
+          <h3 class="text-xl font-semibold mb-2">Title: <%= post.title %></h3>
+          <p class="text-md mb-4">Description: <%= post.description %></p>
+          <button class="block w-full px-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700">Add to Cart</button>
+        </div>
       </div>
     <% }) %>
   </div>

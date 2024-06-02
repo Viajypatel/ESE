@@ -1,21 +1,109 @@
 <% include ./partials/header.ejs %>
-<div class="w-full min-h-screen bg-zinc-800 text-white">
-    <div class="cards flex flex-wrap gap-10">
-        <% posts.forEach(function(elem){ %>
-            <div class="card w-36">
-                <div class="w-full h-40 bg-sky-200 rounded-lg overflow-hidden">
-                  <img src="/images/uploads/<%= elem.image %>" class="w-full h-full object-cover" alt="imgg">
-                </div>
-                <h3 class="mt-2 text-sm">
-                  <%= elem.title %>
-                </h3>
-                <h3 class="mt-2 text-sm">
-                  <!-- Link to show all posts by this user -->
-                  <a href="/user/posts/<%= elem.user._id %>">Chek all Post:<span class="text-red-400"><%= elem.user.username %></span></a>
-                </h3>
+  <div  class="grid">
+    <% if (posts && posts.length > 0) { %>
+      <% posts.forEach(function(elem){ %>
+        <div class="card w-60 rounded-lg shadow-lg overflow-hidden">
+          <a href="/singleItem/<%= elem._id %>" class="block">
+            <div class="w-full h-40 overflow-hidden">
+              <img src="/images/uploads/<%= elem.image %>" class="w-full h-full object-cover" alt="Image">
             </div>
-        <% }) %>
-        
-    </div>
+            <div class="p-4">
+              <h3 class="text-md font-semibold"><%= elem.title %></h3>
+              <p class="mt-2 text-lg text-green-400 font-semibold">₹<%= elem.price %></p>
+              <div class="mt-4 flex justify-between items-center">
+                <a href="/singleItem/<%= elem._id %>" class="inline-block w-1/2 text-center py-2 px-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 mr-2">Buy Now</a>
+                <button class="inline-block w-1/2 text-center py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 save-btn" data-id="<%= elem._id %>" data-title="<%= elem.title %>" data-price="<%= elem.price %>">
+                  Save
+                </button>
+              </div>
+            </div>
+          </a>
+        </div>
+      <% }) %>
+    <% } else { %>
+      <p>No posts available</p>
+    <% } %>
+    
+
+  <!-- Cart Section -->
+  <div style="display: none;" class="cart mt-8 w-full max-w-3xl bg-gray-900 p-6 rounded-lg shadow-lg">
+    <h2 class="text-xl font-semibold mb-4">Cart</h2>
+    <ul id="cart-items" class="cart-items list-disc pl-5">
+      <!-- Cart items will be dynamically added here -->
+    </ul>
+  </div>
 </div>
+
+<!-- Cart Counter Section -->
+<div style="display: none;" class="menuItem cartBox">
+  <span onclick="savePostToLocalStorage()">
+    <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M2.83179 4.38657H3.34341C4.20256 4.38657 4.96125 4.94691 5.21392 5.76808L8.27786 15.7259C8.53053 16.547 9.28921 17.1074 10.1484 17.1074H17.1114C17.9373 17.1074 18.6743 16.5889 18.9534 15.8116L20.9925 10.1312C21.679 8.21867 20.2616 6.20383 18.2295 6.20383H10.66"
+        stroke="#1C1C1C" stroke-width="1.7" stroke-linecap="round" />
+      <circle cx="10.1707" cy="20.5322" r="1.46779" fill="#1C1C1C" />
+      <circle cx="17.0204" cy="20.5322" r="1.46779" fill="#1C1C1C" />
+    </svg>
+  </span>
+  <p>Cart <span id="cartCounter">(0)</span></p>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const saveButtons = document.querySelectorAll(".save-btn");
+    const cartItemsList = document.getElementById("cart-items");
+    const cartCounter = document.getElementById("cartCounter");
+
+    // Load saved items from local storage
+    const savedItems = JSON.parse(localStorage.getItem("cart")) || [];
+
+    // Function to update the cart UI
+    function updateCartUI() {
+      cartItemsList.innerHTML = ""; // Clear current cart items
+      savedItems.forEach(item => {
+        const listItem = document.createElement("li");
+        listItem.textContent = `${item.title} - ₹${item.price}`;
+        cartItemsList.appendChild(listItem);
+      });
+      cartCounter.textContent = `(${savedItems.length})`; // Update cart counter
+    }
+
+    // Initial cart update
+    updateCartUI();
+
+    // Update button states based on local storage
+    saveButtons.forEach(button => {
+      const postId = button.getAttribute("data-id");
+      if (savedItems.some(item => item.id === postId)) {
+        button.textContent = "Saved";
+        button.classList.remove("bg-blue-600");
+        button.classList.add("bg-gray-600");
+      }
+
+      button.addEventListener("click", function() {
+        const postId = this.getAttribute("data-id");
+        const postTitle = this.getAttribute("data-title");
+        const postPrice = this.getAttribute("data-price");
+
+        const itemIndex = savedItems.findIndex(item => item.id === postId);
+        if (itemIndex === -1) {
+          // Item not found in cart, add it
+          savedItems.push({ id: postId, title: postTitle, price: postPrice });
+          this.textContent = "Saved";
+          this.classList.remove("bg-blue-600");
+          this.classList.add("bg-gray-600");
+        } else {
+          // Item found in cart, remove it
+          savedItems.splice(itemIndex, 1);
+          this.textContent = "Save";
+          this.classList.remove("bg-gray-600");
+          this.classList.add("bg-blue-600");
+        }
+        localStorage.setItem("cart", JSON.stringify(savedItems));
+        updateCartUI(); // Update cart display and counter
+      });
+    });
+  });
+</script>
+
 <% include ./partials/footer.ejs %>

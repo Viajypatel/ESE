@@ -1,0 +1,36 @@
+<% include ./partials/header.ejs %>
+
+<div class="platform-description w-full min-h-screen bg-zinc-800 text-white p-6">
+    <h1 class="text-3xl font-bold mb-4">Welcome to Empowering Secondhand Exchange</h1>
+    <p class="text-lg leading-relaxed">
+        Empowering Secondhand Exchange is your go-to platform for buying and selling secondhand items within the college campus. Our mission is to facilitate a seamless and efficient exchange of pre-owned goods among students, promoting sustainability and affordability. Whether you're looking to declutter and make some extra cash by listing your items, or you're on the hunt for great deals on secondhand products, our platform has got you covered.
+    </p>
+    <p class="text-lg leading-relaxed mt-4">
+        Users can easily list their items for sale, providing descriptions and images to attract potential buyers. These listings are displayed in the feed, where other users can browse through and find what they need. Once a buyer finds an item of interest, they can contact the seller directly to arrange the purchase. Transactions are completed upon mutual agreement, and payment is handled between the buyer and the seller.
+    </p>
+    <p class="text-lg leading-relaxed mt-4">
+        Join us at Empowering Secondhand Exchange and be a part of a community that values sustainability, affordability, and the power of secondhand goods. Let's make secondhand the first choice!
+    </p>
+</div>
+
+<script>
+              document.addEventListener("DOMContentLoaded", function () {
+            const cartCounter = document.getElementById("cartCounter");
+
+            // Load saved items from local storage
+            const savedItems = JSON.parse(localStorage.getItem("cart")) || [];
+
+            // Function to update the cart counter
+            function updateCartCounter() {
+                cartCounter.textContent = `(${savedItems.length})`; // Update cart counter
+                cartCounter.classList.remove("hidden"); // Make cart counter visible
+            }
+
+            // Initial cart counter update
+            updateCartCounter();
+        });
+
+</script>
+
+
+<% include ./partials/footer.ejs %>

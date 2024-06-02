@@ -1,24 +1,499 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Dsocumentf</title>
   <link rel="stylesheet" href="/stylesheets/style.css">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.7.0/fonts/remixicon.css" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="/public/images/home/Icon.png" >
 </head>
-<body>
-  <% if(nav===true){%>
-    <div class="w-full px-10 py-3 flex justify-between text-white bg-zinc-800 items-center">
-      <h3>Pinterest</h3>
-      <div class="flex gap-10 items-center">
-      <a href="/profile">Profile</a>
-      <a href="/feed">Feed</a>
-      <a href="/logout" class="bg-red-600 px-3 py-1 text-white rounded-lg">Log Out</a>
-    </div>
-  </div>
-  <%}%>
 
-  
+<body>
+  <% if(nav===true) { %>
+    <div class="headerC">
+      <input class="hidden" id="mainMenu" type="checkbox">
+      <label for="mainMenu" class="menuItem">
+        <span>
+          <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M4 7a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1zm0 5a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1zm0 5a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H5a1 1 0 0 1-1-1z"
+              fill="#0D0D0D" />
+          </svg>
+        </span>
+        <p>menu</p>
+      </label>
+
+      <div class="absolute mainMenuItems">
+        <div class="profilePic flex">
+          <div class="picPenHolder relative">
+            <img src="/images/home/placeholder.jpeg" alt="Profile Picture">
+            <input type="file" id="fileUpload" class="hidden" accept="image/*">
+            <span id="uploadIcon"
+              class="absolute w-8 h-8 bottom-0 right-0 rounded-full flex justify-center items-center bg-zinc-200 text-black cursor-pointer">
+              <svg fill="#000000" width="15px" height="15px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M22,7.24a1,1,0,0,0-.29-.71L17.47,2.29A1,1,0,0,0,16.76,2a1,1,0,0,0-.71.29L13.22,5.12h0L2.29,16.05a1,1,0,0,0-.29.71V21a1,1,0,0,0,1,1H7.24A1,1,0,0,0,8,21.71L18.87,10.78h0L21.71,8a1.19,1.19,0,0,0,.22-.33,1,1,0,0,0,0-.24.7.7,0,0,0,0-.14ZM6.83,20H4V17.17l9.93-9.93,2.83,2.83ZM18.17,8.66,15.34,5.83l1.42-1.41,2.82,2.82Z" />
+              </svg>
+            </span>
+          </div>
+          <div class="usernameName">
+            <p>
+              <%= user.fullname %>
+            </p>
+            <span>
+              <%= user.username %>
+            </span>
+          </div>
+          <a href="/logout" class="logoutBtn menuItem">
+            <span>
+              <svg width="18px" height="18px" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13.5 7.5L10.5 10.75M13.5 7.5L10.5 4.5M13.5 7.5L4 7.5M8 13.5H1.5L1.5 1.5L8 1.5"
+                  stroke="#000000" />
+              </svg>
+            </span>
+            <p>Logout</p>
+          </a>
+        </div>
+        <div class="dOc">
+          <div class="siLc">
+            <a class="sideMeLi" href="/about" title="know more">
+              <div class="inflexC">
+                <span class="inflexC svgBtn">
+                  <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z"
+                      stroke="var(--text)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+                    <path
+                      d="M19.211 15.741L15.671 19.281C15.531 19.421 15.401 19.681 15.371 19.871L15.181 21.221C15.111 21.711 15.451 22.051 15.941 21.981L17.291 21.791C17.481 21.761 17.751 21.631 17.881 21.491L21.421 17.951C22.031 17.341 22.321 16.631 21.421 15.731C20.531 14.841 19.821 15.131 19.211 15.741Z"
+                      stroke="var(--text)" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"
+                      stroke-width="1.5"></path>
+                    <path d="M18.6992 16.25C18.9992 17.33 19.8392 18.17 20.9192 18.47" stroke="var(--text)"
+                      stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5"></path>
+                    <path d="M3.41016 22C3.41016 18.13 7.26018 15 12.0002 15C13.0402 15 14.0402 15.15 14.9702 15.43"
+                      opacity="0.4" stroke="var(--text)" stroke-linecap="round" stroke-linejoin="round"
+                      stroke-width="1.5"></path>
+                  </svg>
+                </span>
+                <span class="mnTxt">About</span>
+              </div>
+              <span class="inflexC arrS">
+                <svg class="itesvg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <g
+                    transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.000000, 8.500000)">
+                    <path d="M14,0 C14,0 9.856,7 7,7 C4.145,7 0,0 0,0"></path>
+                  </g>
+                </svg>
+              </span>
+            </a>
+            <a class="sideMeLi" href="/contact" title="contact us">
+              <div class="inflexC">
+                <span class="inflexC svgBtn">
+                  <svg class="itesvg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <g>
+                      <rect height="16" rx="5" width="20" x="2" y="4"></rect>
+                      <path d="M90.15056,261.91842l1.082.83317a6.66376,6.66376,0,0,0,8.13139,0l1.02841-.79194"
+                        transform="translate(-83.27144 -252.82349)"></path>
+                    </g>
+                  </svg>
+                </span>
+                <span class="mnTxt">Contact</span>
+              </div>
+              <span class="inflexC arrS">
+                <svg class="itesvg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <g
+                    transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.000000, 8.500000)">
+                    <path d="M14,0 C14,0 9.856,7 7,7 C4.145,7 0,0 0,0"></path>
+                  </g>
+                </svg>
+              </span>
+            </a>
+          </div>
+          <div class="hLi">
+            <a aria-label="" class="sTi inflexC bc" data-text="0" href="/home" id="gCi" title="goto home page">
+              <svg fill="#000000" width="18px" height="18px" viewBox="-2 -2 24 24" xmlns="http://www.w3.org/2000/svg"
+                preserveAspectRatio="xMinYMin" class="jam jam-home">
+                <path
+                  d='M18 18V7.132l-8-4.8-8 4.8V18h4v-2.75a4 4 0 1 1 8 0V18h4zm-6 2v-4.75a2 2 0 1 0-4 0V20H2a2 2 0 0 1-2-2V7.132a2 2 0 0 1 .971-1.715l8-4.8a2 2 0 0 1 2.058 0l8 4.8A2 2 0 0 1 20 7.132V18a2 2 0 0 1-2 2h-6z' />
+              </svg></a>
+            <a aria-label="" class="sTi inflexC bc" data-text="0" href="/show/posts" id="gCi" title="your items">
+
+              <svg width="18px" height="18px" viewBox="0 0 1024 1024" class="icon" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#000000"
+                  d="M704 288h131.072a32 32 0 0131.808 28.8L886.4 512h-64.384l-16-160H704v96a32 32 0 11-64 0v-96H384v96a32 32 0 01-64 0v-96H217.92l-51.2 512H512v64H131.328a32 32 0 01-31.808-35.2l57.6-576a32 32 0 0131.808-28.8H320v-22.336C320 154.688 405.504 64 512 64s192 90.688 192 201.664v22.4zm-64 0v-22.336C640 189.248 582.272 128 512 128c-70.272 0-128 61.248-128 137.664v22.4h256zm201.408 483.84L768 698.496V928a32 32 0 11-64 0V698.496l-73.344 73.344a32 32 0 11-45.248-45.248l128-128a32 32 0 0145.248 0l128 128a32 32 0 11-45.248 45.248z" />
+              </svg>
+
+            </a>
+
+            <a class="sTi inflexC AdSvg" href="/add" title="sell item">
+
+              <svg fill="#000000" width="18px" height="18px" viewBox="0 0 24 24" id="upload" data-name="Flat Line"
+                xmlns="http://www.w3.org/2000/svg" class="icon flat-line">
+                <line id="primary" x1="12" y1="16" x2="12" y2="3"
+                  style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;">
+                </line>
+                <polyline id="primary-2" data-name="primary" points="16 7 12 3 8 7"
+                  style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;">
+                </polyline>
+                <path id="primary-3" data-name="primary"
+                  d="M20,16v4a1.08,1.08,0,0,1-1.14,1H5.14A1.08,1.08,0,0,1,4,20V16"
+                  style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;">
+                </path>
+              </svg>
+            </a>
+            <a class="sTi inflexC" href="/contact" title="Send a tip">
+              <svg class="itesvg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <g transform="translate(2.000000, 2.000000)">
+                  <path
+                    d="M10.0002,0.7501 C3.0632,0.7501 0.7502,3.0631 0.7502,10.0001 C0.7502,16.9371 3.0632,19.2501 10.0002,19.2501 C16.9372,19.2501 19.2502,16.9371 19.2502,10.0001">
+                  </path>
+                  <path
+                    d="M17.5285,2.3038 L17.5285,2.3038 C16.5355,1.4248 15.0185,1.5168 14.1395,2.5098 C14.1395,2.5098 9.7705,7.4448 8.2555,9.1578 C6.7385,10.8698 7.8505,13.2348 7.8505,13.2348 C7.8505,13.2348 10.3545,14.0278 11.8485,12.3398 C13.3435,10.6518 17.7345,5.6928 17.7345,5.6928 C18.6135,4.6998 18.5205,3.1828 17.5285,2.3038 Z">
+                  </path>
+                  <line x1="13.009" x2="16.604" y1="3.8008" y2="6.9838"></line>
+                </g>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="siLc siLcC">
+          <a class="sideMeLi" href="/book" title="latest updates and news">
+            <div class="inflexC">
+              <span class="inflexC svgBtn">
+                <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M368 415.86V72a24.07 24.07 0 00-24-24H72a24.07 24.07 0 00-24 24v352a40.12 40.12 0 0040 40h328"
+                    fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="20"></path>
+                  <path d="M416 464h0a48 48 0 01-48-48V128h72a24 24 0 0124 24v264a48 48 0 01-48 48z" fill="none"
+                    stroke="currentColor" stroke-linejoin="round" stroke-width="20"></path>
+                  <path d="M240 128h64M240 192h64M112 256h192M112 320h192M112 384h192" fill="none" stroke="currentColor"
+                    stroke-linecap="round" stroke-linejoin="round" stroke-width="20"></path>
+                  <path d="M176 208h-64a16 16 0 01-16-16v-64a16 16 0 0116-16h64a16 16 0 0116 16v64a16 16 0 01-16 16z">
+                  </path>
+                </svg>
+              </span>
+              <span class="mnTxt">Books</span>
+            </div>
+            <span class="inflexC arrS">
+              <svg class="itesvg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <g
+                  transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.000000, 8.500000)">
+                  <path d="M14,0 C14,0 9.856,7 7,7 C4.145,7 0,0 0,0"></path>
+                </g>
+              </svg>
+            </span>
+          </a>
+          <a class="sideMeLi" href="/electronics" title="explore gadgets">
+            <div class="inflexC">
+              <span class="inflexC svgBtn">
+                <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M60.77,42.22a8,8,0,0,0-2.72-6c.4-8.6-.52-15.23-2.8-20.27a4,4,0,0,0,.17-.44,5,5,0,0,0-.79-4.11A28.39,28.39,0,0,0,32,0,28.17,28.17,0,0,0,9.07,11.16a5,5,0,0,0-.84,4.65l0,.16a4.9,4.9,0,0,0,.24.52C5.92,20.67,5.12,27,6,36.14a8.06,8.06,0,0,0,4.33,14.08v1.19h0V54.6A6.7,6.7,0,0,0,17,61.29h8.15C25.83,62.89,28.1,64,31,64c3.42,0,6-1.58,6-3.68s-2.58-3.67-6-3.67c-2.87,0-5.14,1.11-5.8,2.7H17a4.75,4.75,0,0,1-4.75-4.75V53.07H16.9a1.58,1.58,0,0,0,1.58-1.58V33.7a1.58,1.58,0,0,0-1.58-1.58H12.11c-.52-5.59.15-9.7,2.07-12.78a4.54,4.54,0,0,0,2.89-1.8c3-4.17,8.13-6.67,14.06-6.86,6.37-.21,12.3,2.3,15.9,6.68a4.86,4.86,0,0,0,3.22,1.76,30.69,30.69,0,0,1,1.61,13H47.1a1.58,1.58,0,0,0-1.58,1.58V51.49a1.58,1.58,0,0,0,1.58,1.58h5a1.59,1.59,0,0,0,1.59-1.58V50.22A8.07,8.07,0,0,0,60.77,42.22ZM31,58.59c2.48,0,4.06,1,4.06,1.73S33.45,62.06,31,62.06s-4.06-1-4.07-1.73h0C26.91,59.61,28.49,58.59,31,58.59ZM56.16,34.93a8,8,0,0,0-2.49-.72V33.8a33.83,33.83,0,0,0-1.43-14.88c.16-.06.33-.11.49-.18l.11-.06A4.69,4.69,0,0,0,54,17.89C55.67,22.25,56.38,27.87,56.16,34.93Zm-51,7.29a6.13,6.13,0,0,1,5.16-6V48.26A6.13,6.13,0,0,1,5.17,42.22Zm7.1-8.16h4.27V51.13H12.27Zm-1.94-.25v.4a7.79,7.79,0,0,0-2.49.73c-.64-7.65,0-13.18,2-16.81A5.64,5.64,0,0,0,12,19.26C10.09,22.87,9.56,27.55,10.33,33.81Zm38.2-17.68c-4-4.84-10.51-7.62-17.46-7.39-6.54.21-12.21,3-15.58,7.66a2.69,2.69,0,0,1-2.64,1.06A3.43,3.43,0,0,1,10.1,15.3l0-.11a3.12,3.12,0,0,1,.56-2.86A26.17,26.17,0,0,1,31.69,1.94h.25A26.43,26.43,0,0,1,53.06,12.52a3,3,0,0,1,.47,2.5,2.84,2.84,0,0,1-5,1.11Zm3.2,35H47.46V34.06h4.27Zm1.94-2.87V36.17a6.12,6.12,0,0,1,0,12.09Z">
+                  </path>
+                  <path
+                    d="M42.38,17.85H22.48a1,1,0,0,0-1,1V32.4a1,1,0,0,0,1,1h9.74l4.85,4.84a1,1,0,0,0,.69.28.79.79,0,0,0,.3-.05,1,1,0,0,0,.66-.77l.64-4.3h3a1,1,0,0,0,1-1V18.82A1,1,0,0,0,42.38,17.85Zm-1,13.58h-2.9a1,1,0,0,0-1,.83l-.49,3.22L33.3,31.71a1,1,0,0,0-.68-.28H23.45V19.79h18Z">
+                  </path>
+                </svg>
+              </span>
+              <span class="mnTxt">Electronics</span>
+            </div>
+            <span class="inflexC arrS">
+              <svg class="itesvg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <g
+                  transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.000000, 8.500000)">
+                  <path d="M14,0 C14,0 9.856,7 7,7 C4.145,7 0,0 0,0"></path>
+                </g>
+              </svg>
+            </span>
+          </a>
+
+          <a class="sideMeLi" href="/furniture" title="explore gadgets">
+            <div class="inflexC">
+              <span class="inflexC svgBtn">
+                <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 487.646 487.646"
+                  style="enable-background:new 0 0 487.646 487.646;" xml:space="preserve">
+                  <path
+                    d="M459.609,97.626H28.038C12.553,97.626,0,110.179,0,125.663v62.381c0,15.484,12.553,28.037,28.038,28.037h20.013
+             l-26.02,162.154c-0.89,5.547,2.885,10.765,8.431,11.655c0.546,0.088,1.088,0.13,1.624,0.13c4.907,0,9.229-3.561,10.031-8.561
+             l26.537-165.377h350.337l26.538,165.377c0.802,5.001,5.123,8.561,10.031,8.561c0.535,0,1.078-0.042,1.624-0.13
+             c5.547-0.89,9.321-6.108,8.431-11.655l-26.02-162.154h20.014c15.484,0,28.037-12.553,28.037-28.037v-62.381
+             C487.646,110.179,475.093,97.626,459.609,97.626z M260.098,167.025h-32.55c-5.618,0-10.172-4.554-10.172-10.172
+             c0-5.618,4.554-10.171,10.172-10.171h32.55c5.618,0,10.172,4.554,10.172,10.171C270.27,162.471,265.715,167.025,260.098,167.025z" />
+                </svg></span>
+              <span class="mnTxt">Furniture</span>
+            </div>
+            <span class="inflexC arrS">
+              <svg class="itesvg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <g
+                  transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.000000, 8.500000)">
+                  <path d="M14,0 C14,0 9.856,7 7,7 C4.145,7 0,0 0,0"></path>
+                </g>
+              </svg>
+            </span>
+          </a>
+
+          <a class="sideMeLi" href="/sports" title="explore gadgets">
+            <div class="inflexC">
+              <span class="inflexC svgBtn">
+                <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 191.737 191.737"
+                  style="enable-background:new 0 0 191.737 191.737;" xml:space="preserve">
+                  <g>
+                    <path d="M131.449,58.481c15.02,0,27.239-12.219,27.239-27.239S146.469,4.003,131.449,4.003c-15.019,0-27.238,12.219-27.238,27.239
+		S116.43,58.481,131.449,58.481z M131.449,18.003c7.3,0,13.239,5.939,13.239,13.239s-5.939,13.239-13.239,13.239
+		c-7.3,0-13.238-5.939-13.238-13.239S124.149,18.003,131.449,18.003z" />
+                    <path d="M189.723,70.818c-2.714-2.753-7.146-2.787-9.899-0.072c-0.162,0.162-18.817,15.023-74.339-8.707
+		C81.471,51.776,62.162,50.808,48.093,59.16c-17.174,10.195-19.279,30.235-19.36,31.083c-0.367,3.833,2.434,7.224,6.265,7.612
+		c0.238,0.024,0.475,0.036,0.709,0.036c3.537,0,6.575-2.685,6.958-6.276c0.015-0.139,1.615-13.992,12.682-20.48
+		c9.872-5.788,25.308-4.482,44.634,3.778c26.231,11.21,45.529,14.675,59.371,14.674c20.344-0.001,28.896-7.488,30.298-8.87
+		C192.404,78.003,192.436,73.571,189.723,70.818z" />
+                    <path d="M100.765,92.257c-2.667-2.788-7.085-2.893-9.881-0.235c-33.479,31.822-84.502,80.152-88.165,83.173
+		c-3.022,2.335-3.617,6.673-1.317,9.738c1.375,1.833,3.477,2.8,5.605,2.8c1.461,0,2.936-0.457,4.195-1.401
+		c3.188-2.392,60.012-56.31,84.269-79.356l33.736,35.27c1.496,1.564,0.999,3.275,0.715,3.938c-0.283,0.663-1.175,2.205-3.339,2.205
+		H80.404c-3.866,0-7,3.134-7,7s3.134,7,7,7h46.178c7.18,0,13.393-4.102,16.213-10.704c2.821-6.603,1.491-13.927-3.472-19.115
+		L100.765,92.257z" />
+                  </g>
+                </svg>
+              </span>
+              <span class="mnTxt">Sports</span>
+            </div>
+            <span class="inflexC arrS">
+              <svg class="itesvg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <g
+                  transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.000000, 8.500000)">
+                  <path d="M14,0 C14,0 9.856,7 7,7 C4.145,7 0,0 0,0"></path>
+                </g>
+              </svg>
+            </span>
+          </a>
+
+
+          <a class="sideMeLi" href="/fitness" title="explore gadgets">
+            <div class="inflexC">
+              <span class="inflexC svgBtn">
+                <!-- License: PD. Made by IonutNeagu: https://github.com/IonutNeagu -->
+                <svg fill="#000000" width="800px" height="800px" viewBox="0 0 24 24" id="Layer_1" data-name="Layer 1"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M22.942,6.837,20.76,4.654l.947-.947a1,1,0,1,0-1.414-1.414l-.947.947L17.163,1.058a3.7,3.7,0,0,0-5.105,0,3.609,3.609,0,0,0,0,5.106L14.24,8.346,8.346,14.24,6.163,12.058a3.7,3.7,0,0,0-5.105,0,3.609,3.609,0,0,0,0,5.106L3.24,19.346l-.947.947a1,1,0,1,0,1.414,1.414l.947-.947,2.183,2.182a3.609,3.609,0,0,0,5.105,0h0a3.608,3.608,0,0,0,0-5.105L9.76,15.655l5.9-5.895,2.182,2.182a3.609,3.609,0,0,0,5.105,0h0a3.608,3.608,0,0,0,0-5.105ZM11,20.39a1.6,1.6,0,0,1-.472,1.138,1.647,1.647,0,0,1-2.277,0L2.472,15.749a1.61,1.61,0,1,1,2.277-2.277l5.779,5.779A1.6,1.6,0,0,1,11,20.39Zm10.528-9.862a1.647,1.647,0,0,1-2.277,0L13.472,4.749a1.61,1.61,0,1,1,2.277-2.277l5.779,5.779a1.609,1.609,0,0,1,0,2.277Z" />
+                </svg></span>
+              <span class="mnTxt">Fitness</span>
+            </div>
+            <span class="inflexC arrS">
+              <svg class="itesvg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <g
+                  transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.000000, 8.500000)">
+                  <path d="M14,0 C14,0 9.856,7 7,7 C4.145,7 0,0 0,0"></path>
+                </g>
+              </svg>
+            </span>
+          </a>
+
+
+          <a class="sideMeLi" href="/others" title="explore gadgets">
+            <div class="inflexC">
+              <span class="inflexC svgBtn">
+                <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M60.77,42.22a8,8,0,0,0-2.72-6c.4-8.6-.52-15.23-2.8-20.27a4,4,0,0,0,.17-.44,5,5,0,0,0-.79-4.11A28.39,28.39,0,0,0,32,0,28.17,28.17,0,0,0,9.07,11.16a5,5,0,0,0-.84,4.65l0,.16a4.9,4.9,0,0,0,.24.52C5.92,20.67,5.12,27,6,36.14a8.06,8.06,0,0,0,4.33,14.08v1.19h0V54.6A6.7,6.7,0,0,0,17,61.29h8.15C25.83,62.89,28.1,64,31,64c3.42,0,6-1.58,6-3.68s-2.58-3.67-6-3.67c-2.87,0-5.14,1.11-5.8,2.7H17a4.75,4.75,0,0,1-4.75-4.75V53.07H16.9a1.58,1.58,0,0,0,1.58-1.58V33.7a1.58,1.58,0,0,0-1.58-1.58H12.11c-.52-5.59.15-9.7,2.07-12.78a4.54,4.54,0,0,0,2.89-1.8c3-4.17,8.13-6.67,14.06-6.86,6.37-.21,12.3,2.3,15.9,6.68a4.86,4.86,0,0,0,3.22,1.76,30.69,30.69,0,0,1,1.61,13H47.1a1.58,1.58,0,0,0-1.58,1.58V51.49a1.58,1.58,0,0,0,1.58,1.58h5a1.59,1.59,0,0,0,1.59-1.58V50.22A8.07,8.07,0,0,0,60.77,42.22ZM31,58.59c2.48,0,4.06,1,4.06,1.73S33.45,62.06,31,62.06s-4.06-1-4.07-1.73h0C26.91,59.61,28.49,58.59,31,58.59ZM56.16,34.93a8,8,0,0,0-2.49-.72V33.8a33.83,33.83,0,0,0-1.43-14.88c.16-.06.33-.11.49-.18l.11-.06A4.69,4.69,0,0,0,54,17.89C55.67,22.25,56.38,27.87,56.16,34.93Zm-51,7.29a6.13,6.13,0,0,1,5.16-6V48.26A6.13,6.13,0,0,1,5.17,42.22Zm7.1-8.16h4.27V51.13H12.27Zm-1.94-.25v.4a7.79,7.79,0,0,0-2.49.73c-.64-7.65,0-13.18,2-16.81A5.64,5.64,0,0,0,12,19.26C10.09,22.87,9.56,27.55,10.33,33.81Zm38.2-17.68c-4-4.84-10.51-7.62-17.46-7.39-6.54.21-12.21,3-15.58,7.66a2.69,2.69,0,0,1-2.64,1.06A3.43,3.43,0,0,1,10.1,15.3l0-.11a3.12,3.12,0,0,1,.56-2.86A26.17,26.17,0,0,1,31.69,1.94h.25A26.43,26.43,0,0,1,53.06,12.52a3,3,0,0,1,.47,2.5,2.84,2.84,0,0,1-5,1.11Zm3.2,35H47.46V34.06h4.27Zm1.94-2.87V36.17a6.12,6.12,0,0,1,0,12.09Z">
+                  </path>
+                  <path
+                    d="M42.38,17.85H22.48a1,1,0,0,0-1,1V32.4a1,1,0,0,0,1,1h9.74l4.85,4.84a1,1,0,0,0,.69.28.79.79,0,0,0,.3-.05,1,1,0,0,0,.66-.77l.64-4.3h3a1,1,0,0,0,1-1V18.82A1,1,0,0,0,42.38,17.85Zm-1,13.58h-2.9a1,1,0,0,0-1,.83l-.49,3.22L33.3,31.71a1,1,0,0,0-.68-.28H23.45V19.79h18Z">
+                  </path>
+                </svg>
+              </span>
+              <span class="mnTxt">Others</span>
+            </div>
+            <span class="inflexC arrS">
+              <svg class="itesvg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <g
+                  transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000) translate(5.000000, 8.500000)">
+                  <path d="M14,0 C14,0 9.856,7 7,7 C4.145,7 0,0 0,0"></path>
+                </g>
+              </svg>
+            </span>
+          </a>
+
+        </div>
+
+
+        <!-- <ul class="siLc">
+          <li class="accord">
+            <div class="sideMeLi">
+              <div class="inflexC">
+                <span class="inflexC svgBtn">
+                  <svg class="itesvg" height="22" viewBox="0 0 18 22" width="18" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17 6V16C17 20 16 21 12 21H6C2 21 1 20 1 16V6C1 2 2 1 6 1H12C16 1 17 2 17 6Z"
+                      stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M11 4.5H7" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path
+                      d="M8.99995 18.1C9.85599 18.1 10.55 17.406 10.55 16.55C10.55 15.694 9.85599 15 8.99995 15C8.14391 15 7.44995 15.694 7.44995 16.55C7.44995 17.406 8.14391 18.1 8.99995 18.1Z"
+                      stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                </span>
+                <span class="mnTxt">Phones</span>
+              </div>
+              <span class="inflexC arrS">
+                <svg class="itesvg" viewBox="0 0 24 24">
+                  <g transform="translate(5.000000, 8.500000)">
+                    <path d="M14,0 C14,0 9.856,7 7,7 C4.145,7 0,0 0,0"></path>
+                  </g>
+                </svg>
+              </span>
+            </div>
+            <ul class="subLinks">
+              <li><a href="https://www.gamstrain.com/search/label/Camera_Phone">Camera Phones</a></li>
+              <li><a href="https://www.gamstrain.com/search/label/Gaming_Phone">Gaming Phones</a></li>
+            </ul>
+          </li>
+          <li class="accord">
+            <div class="sideMeLi">
+              <div class="inflexC">
+                <span class="inflexC svgBtn">
+                  <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                    <rect fill="none" height="304" rx="32.14" ry="32.14" stroke="currentColor" stroke-linejoin="round"
+                      stroke-width="32" width="416" x="48" y="96"></rect>
+                    <path d="M16 416h480" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10"
+                      stroke-width="32"></path>
+                  </svg>
+                </span>
+                <span class="mnTxt">Laptops</span>
+              </div>
+              <span class="inflexC arrS">
+                <svg class="itesvg" viewBox="0 0 24 24">
+                  <g transform="translate(5.000000, 8.500000)">
+                    <path d="M14,0 C14,0 9.856,7 7,7 C4.145,7 0,0 0,0"></path>
+                  </g>
+                </svg>
+              </span>
+            </div>
+            <ul class="subLinks">
+              <li><a href="https://www.gamstrain.com/search/label/Gaming_Laptop">Gaming</a></li>
+            </ul>
+          </li>
+          <li class="accord">
+            <div class="sideMeLi">
+              <div class="inflexC">
+                <span class="inflexC svgBtn">
+                  <svg class="itesvg" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 7V17C21 20 19.5 22 16 22H8C4.5 22 3 20 3 17V7C3 4 4.5 2 8 2H16C19.5 2 21 4 21 7Z">
+                    </path>
+                    <path
+                      d="M16.25 11H7.75C6.79 11 6 10.21 6 9.25V6.75C6 5.79 6.79 5 7.75 5H16.25C17.21 5 18 5.79 18 6.75V9.25C18 10.21 17.21 11 16.25 11Z"
+                      opacity="0.4"></path>
+                    <path d="M10.3 15.2803L8 17.5803"></path>
+                    <path d="M8.03027 15.3101L10.3303 17.61"></path>
+                    <path d="M16.4902 15.3301H16.5103" opacity="0.4"></path>
+                    <path d="M14.4902 17.5V17.48" opacity="0.4"></path>
+                  </svg>
+                </span>
+                <span class="mnTxt">Consoles</span>
+              </div>
+              <span class="inflexC arrS">
+                <svg class="itesvg" viewBox="0 0 24 24">
+                  <g transform="translate(5.000000, 8.500000)">
+                    <path d="M14,0 C14,0 9.856,7 7,7 C4.145,7 0,0 0,0"></path>
+                  </g>
+                </svg>
+              </span>
+            </div>
+            <ul class="subLinks">
+              <li><a href="https://www.gamstrain.com/search/label/gaming_consoles">Sony</a></li>
+            </ul>
+          </li>
+        </ul> -->
+
+      </div>
+
+      <p class='horizontal'><a href='/home'>ESE</a></p>
+
+
+      <div class="headerC headerChild">
+        <div class="search-box flex">
+          <input class="hidden" id="srchTgl" type="checkbox">
+          <label for="srchTgl">
+            <svg fill="#000000" width="18px" height="18px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M21.71,20.29,18,16.61A9,9,0,1,0,16.61,18l3.68,3.68a1,1,0,0,0,1.42,0A1,1,0,0,0,21.71,20.29ZM11,18a7,7,0,1,1,7-7A7,7,0,0,1,11,18Z" />
+            </svg>
+          </label>
+          <div class="searchInput">
+            <form id="searchForm" action="/search" method="GET">
+              <input type="text" id="searchInput" name="q" placeholder="Enter your search query">
+              <!-- <button type="submit">Search</button> -->
+            </form>
+          </div>
+        </div>
+        |
+        <!-- <div> -->
+          <a class="menuItem cartBox" href="/savedItems">
+          <span onclick="savePostToLocalStorage()">
+            <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M2.83179 4.38657H3.34341C4.20256 4.38657 4.96125 4.94691 5.21392 5.76808L8.27786 15.7259C8.53053 16.547 9.28921 17.1074 10.1484 17.1074H17.1114C17.9373 17.1074 18.6743 16.5889 18.9534 15.8116L20.9925 10.1312C21.679 8.21867 20.2616 6.20383 18.2295 6.20383H10.66"
+                stroke="#1C1C1C" stroke-width="1.7" stroke-linecap="round" />
+              <circle cx="10.1707" cy="20.5322" r="1.46779" fill="#1C1C1C" />
+              <circle cx="17.0204" cy="20.5322" r="1.46779" fill="#1C1C1C" />
+            </svg>
+          </span>
+          <p>Cart <span id="cartCounter">(0)</span></p>
+        </a>
+        <!-- </div> -->
+      </div>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+  const searchForm = document.getElementById('searchForm');
+  const searchResultsContainer = document.getElementById('searchResultsContainer');
+
+  searchForm.addEventListener('submit', async function (event) {
+    event.preventDefault(); // Prevent default form submission
+    const searchInput = document.getElementById('searchInput');
+    const searchQuery = searchInput.value.trim(); // Get the search query from the input field
+    if (searchQuery) {
+      try {
+        const response = await fetch(`/search?q=${encodeURIComponent(searchQuery)}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch search results');
+        }
+        const searchResultsHTML = await response.text(); // Assuming the server returns HTML
+        searchResultsContainer.innerHTML = searchResultsHTML; // Display the search results on the same page
+      } catch (error) {
+        console.error('Error fetching search results:', error);
+      }
+    }
+  });
+});
+
+        var Gac = document.querySelectorAll(".accord");
+        Gac.forEach(c => { c.addEventListener("click", () => { c.classList.toggle("accordAct") }) });
+
+        document.getElementById('srchTgl').onclick = function () {
+          document.getElementById('srch').focus();
+        };
+
+        document.getElementById('uploadIcon').onclick = function () {
+          document.getElementById('fileUpload').click();
+        };
+
+        document.getElementById('fileUpload').onchange = function () {
+          const file = this.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              document.querySelector('.picPenHolder img').src = e.target.result;
+              // You can also add code here to upload the image to the server
+            }
+            reader.readAsDataURL(file);
+          }
+        };
+      </script>
+    </div>
+    <% } %>
+</body>
+
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.7.0/fonts/remixicon.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+
+  <% include ./partials/header.ejs %>
+
+    <div class="main">
+      <div class="textA">
+        <div class="textArea">
+          <h1>
+            <span class="text-red-700">E</span><span class="text-black">S</span><span
+              style='text-shadow: 0 0 3px black;' class="text-red-00">E</span>
+          </h1>
+          <p>Empowering Secondhand Exchange</p>
+        </div>
+
+        <div class="webText">
+          <p>Buy and sell secondhand gadgets, electronics, books, furnitures, phones, laptops, cooler and more on our
+            platform to save money and reduce
+            waste.</p>
+
+          <div style="gap: 10px" class="flex shopBtn">
+            <a href="/home/feed"><span>shop now</span></a>
+
+            <a href="/home/add"><span>sell now</span></a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="shopBC overflow-hidden">
+      <h1>Shop by category</h1>
+      <ul class="flex flex-row gap-[10px] marquee">
+        <li>
+          <a href="/electronics" class="block bg-center bg-cover bg-no-repeat"
+            style="background-image: url('/images/home/laptop.jpg');">
+            Electronics
+          </a>
+        </li>
+        <li>
+          <a href="/book" class="block bg-center bg-cover bg-no-repeat"
+            style="background-image: url('/images/home/hard-cover-books.jpg');">
+            Books
+          </a>
+        </li>
+        <li>
+          <a href="/furniture" class="block bg-center bg-cover bg-no-repeat"
+            style="background-image: url('/images/home/furniture.jpg');">
+            Furniture
+          </a>
+        </li>
+        <li>
+          <a href="/sports" class="block bg-center bg-cover bg-no-repeat"
+            style="background-image: url('/images/home/sportss.jpg');">
+            Sports
+          </a>
+        </li>
+        <li>
+          <a href="/fitness" class="block bg-center bg-cover bg-no-repeat"
+            style="background-image: url('/images/home/dumbell.jpg');">
+           Fitness
+          </a>
+        </li>
+        <li>
+          <a href="/others" class="block bg-center bg-cover bg-no-repeat"
+            style="background-image: url('/images/home/electronicsG.jpg');">
+            Others
+          </a>
+        </li>
+      </ul>
+    </div>
+
+
+    <h2 class="text-2xl mx-4 font-bold mb-6">Latest Items</h2>
+
+    <div id="feed" class="grid">
+      <% if (posts && posts.length> 0) { %>
+        <% posts.forEach(function(elem) { %>
+          <div
+            class="card rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105">
+            <a href="/singleItem/<%= elem._id %>" class="block">
+              <div class="w-full h-40 overflow-hidden">
+                <img src="/images/uploads/<%= elem.image %>" class="w-full h-full object-cover" alt="Image">
+              </div>
+              <div class="p-4">
+                <h3 class="text-sm font-semibold">
+                  <%= elem.title %>
+                </h3>
+                <p class="mt-2 text-base text-green-400 font-semibold">₹<%= elem.price %>
+                </p>
+                <div class="mt-4 flex justify-between items-center">
+                  <a href="/singleItem/<%= elem._id %>"
+                    class="inline-block w-1/2 text-center py-1 px-2 bg-indigo-600 text-white text-xs font-semibold rounded-lg hover:bg-indigo-700 mr-2">Buy
+                    Now</a>
+                  <button
+                    class="inline-block w-1/2 text-center py-1 px-2 bg-blue-600 text-white text-xs font-semibold rounded-lg hover:bg-blue-700 save-btn"
+                    data-id="<%= elem._id %>" data-title="<%= elem.title %>"
+                    data-price="<%= elem.price %>">Save</button>
+                </div>
+              </div>
+            </a>
+          </div>
+          <% }) %>
+            <% } else { %>
+              <p class="text-center text-gray-400">No posts available</p>
+              <% } %>
+    </div>
+
+    <!-- Cart Section -->
+    <div style="display: none;" class="cart mt-8 w-full max-w-3xl bg-gray-900 p-6 rounded-lg shadow-lg">
+      <h2 class="text-lg font-semibold mb-4">Cart</h2>
+      <ul id="cart-items" class="cart-items list-disc pl-5 text-sm">
+        <!-- Cart items will be dynamically added here -->
+      </ul>
+    </div>
+    </div>
+
+    <!-- Cart Counter Section -->
+    <div style="display: none;" class="menuItem cartBox">
+      <span onclick="savePostToLocalStorage()">
+        <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M2.83179 4.38657H3.34341C4.20256 4.38657 4.96125 4.94691 5.21392 5.76808L8.27786 15.7259C8.53053 16.547 9.28921 17.1074 10.1484 17.1074H17.1114C17.9373 17.1074 18.6743 16.5889 18.9534 15.8116L20.9925 10.1312C21.679 8.21867 20.2616 6.20383 18.2295 6.20383H10.66"
+            stroke="#1C1C1C" stroke-width="1.7" stroke-linecap="round" />
+          <circle cx="10.1707" cy="20.5322" r="1.46779" fill="#1C1C1C" />
+          <circle cx="17.0204" cy="20.5322" r="1.46779" fill="#1C1C1C" />
+        </svg>
+      </span>
+      <p class="text-sm">Cart <span id="cartCounter">(0)</span></p>
+    </div>
+
+</body>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const saveButtons = document.querySelectorAll(".save-btn");
+    const cartItemsList = document.getElementById("cart-items");
+    const cartCounter = document.getElementById("cartCounter");
+
+    // Load saved items from local storage
+    const savedItems = JSON.parse(localStorage.getItem("cart")) || [];
+
+    // Function to update the cart UI
+    function updateCartUI() {
+      cartItemsList.innerHTML = ""; // Clear current cart items
+      savedItems.forEach(item => {
+        const listItem = document.createElement("li");
+        listItem.textContent = `${item.title} - ₹${item.price}`;
+        cartItemsList.appendChild(listItem);
+      });
+      cartCounter.textContent = `(${savedItems.length})`; // Update cart counter
+    }
+
+    // Initial cart update
+    updateCartUI();
+
+    // Update button states based on local storage
+    saveButtons.forEach(button => {
+      const postId = button.getAttribute("data-id");
+      if (savedItems.some(item => item.id === postId)) {
+        button.textContent = "Saved";
+        button.classList.remove("bg-blue-600");
+        button.classList.add("bg-gray-600");
+      }
+
+      button.addEventListener("click", function () {
+        const postId = this.getAttribute("data-id");
+        const postTitle = this.getAttribute("data-title");
+        const postPrice = this.getAttribute("data-price");
+
+        const itemIndex = savedItems.findIndex(item => item.id === postId);
+        if (itemIndex === -1) {
+          // Item not found in cart, add it
+          savedItems.push({ id: postId, title: postTitle, price: postPrice });
+          this.textContent = "Saved";
+          this.classList.remove("bg-blue-600");
+          this.classList.add("bg-gray-600");
+        } else {
+          // Item found in cart, remove it
+          savedItems.splice(itemIndex, 1);
+          this.textContent = "Save";
+          this.classList.remove("bg-gray-600");
+          this.classList.add("bg-blue-600");
+        }
+        localStorage.setItem("cart", JSON.stringify(savedItems));
+        updateCartUI(); // Update cart display and counter
+      });
+    });
+  });
+
+
+
+</script>
+
+</html>
+
+<% include ./partials/footer.ejs %>

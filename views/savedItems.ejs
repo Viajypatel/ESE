@@ -1,0 +1,19 @@
+<!-- savedItems.ejs -->
+
+<% include ./partials/header.ejs %>
+
+<div class="grid">
+  <% if (savedItems && savedItems.length > 0) { %>
+    <% savedItems.forEach(function(item){ %>
+      <div class="card w-60 rounded-lg shadow-lg overflow-hidden">
+        <h3 class="text-md font-semibold"><%= item.title %></h3>
+        <p class="mt-2 text-lg text-green-400 font-semibold">₹<%= item.price %></p>
+        <!-- Add any other details you want to display -->
+      </div>
+    <% }) %>
+  <% } else { %>
+    <p>No saved items available</p>
+  <% } %>
+</div>
+
+<% include ./partials/footer.ejs %>

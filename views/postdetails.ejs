@@ -1,0 +1,39 @@
+<!-- views/postdetails.ejs -->
+<% include ./partials/header.ejs %>
+<div class="w-full min-h-screen bg-zinc-800 text-white flex flex-col items-center py-8">
+    <div class="w-11/12 md:w-2/3 lg:w-1/2 bg-gray-900 rounded-lg shadow-lg overflow-hidden">
+        <div class="w-full h-60 bg-sky-200 overflow-hidden">
+            <img src="/images/uploads/<%= post.image %>" class="w-full h-full object-cover" alt="<%= post.title %>">
+        </div>
+        <div class="p-6">
+            <h1 class="text-3xl font-bold mb-4"><%= post.title %></h1>
+            <p class="text-lg text-green-400 font-semibold mb-4">Price: ₹<%= post.price %></p>
+            <p class="text-sm text-gray-400 mb-4">Category: <%= post.category %></p>
+            <p class="text-sm text-gray-400 mb-4">Mobile Number: <%= post.mobNumber %></p>
+            <p class="text-sm text-gray-400 mb-4">Hostel: <%= post.hostel %></p>
+            <p class="text-sm text-gray-400 mb-4">Room Number: <%= post.roomNum %></p>
+            <p class="text-md mb-6"><%= post.description %></p>
+            <!-- <a href="/buy/<%= post._id %>" class="inline-block w-full text-center py-2 px-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700">
+                Buy Now
+            </a> -->
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const cartCounter = document.getElementById("cartCounter");
+
+        // Load saved items from local storage
+        const savedItems = JSON.parse(localStorage.getItem("cart")) || [];
+
+        // Function to update the cart counter
+        function updateCartCounter() {
+            cartCounter.textContent = `(${savedItems.length})`; // Update cart counter
+            cartCounter.classList.remove("hidden"); // Make cart counter visible
+        }
+
+        // Initial cart counter update
+        updateCartCounter();
+    });
+</script>
+<% include ./partials/footer.ejs %>

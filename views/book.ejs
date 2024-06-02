@@ -1,0 +1,55 @@
+<% include ./partials/header.ejs %>
+
+<p class="text-lg font-semibold mb-6"><b>Category: </b>Books</p>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <% posts.forEach(function(elem){ %>
+        <div class="card w-60 rounded-lg shadow-lg overflow-hidden">
+            <div class="w-full h-40 overflow-hidden">
+                <img src="/images/uploads/<%= elem.image %>" class="w-full h-full object-cover" alt="<%= elem.title %>">
+            </div>
+            <div class="p-4">
+                <h3 class="text-md font-semibold">
+                    <%= elem.title %>
+                </h3>
+                <p class="mt-2 text-lg text-green-400 font-semibold">
+                    ₹<%= elem.price %>
+                </p>
+                <div class="mt-4 flex justify-between items-center">
+                    <a href="/singleItem/<%= elem._id %>" class="inline-block w-1/2 text-center py-2 px-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 mr-2">
+                        Buy Now
+                    </a>
+                    <button class="inline-block w-1/2 text-center py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700">
+                        Save
+                    </button>
+                </div>
+                <h3 class="mt-2 text-sm text-gray-400">
+                    <% if (elem.user && elem.user._id) { %>
+                        <a href="/user/posts/<%= elem.user._id %>" class="text-indigo-400 hover:underline">Check more items from <%= elem.user.username %></a>
+                    <% } else { %>
+                        User information not available
+                    <% } %>
+                </h3>
+            </div>
+        </div>
+    <% }) %>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const cartCounter = document.getElementById("cartCounter");
+
+        // Load saved items from local storage
+        const savedItems = JSON.parse(localStorage.getItem("cart")) || [];
+
+        // Function to update the cart counter
+        function updateCartCounter() {
+            cartCounter.textContent = `(${savedItems.length})`; // Update cart counter
+            cartCounter.classList.remove("hidden"); // Make cart counter visible
+        }
+
+        // Initial cart counter update
+        updateCartCounter();
+    });
+</script>
+
+<% include ./partials/footer.ejs %>

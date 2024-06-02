@@ -1,7 +1,7 @@
 <% include ./partials/header.ejs %>
-<div class="w-full h-screen bg-zinc-100 flex items-center justify-center">
-  <div class="w-70 h-[84vh] bg-white rounded-lg px-8 py-8">
-    <h1 class="text-3xl text-center leading-none mb-3 tracking-tighter">Create New Account</h1>
+<div class="w-full h-screen bg-white flex items-center justify-center">
+  <div class="w-70 bg-white rounded-lg px-8 py-8">
+    <h1 class="text-3xl text-center leading-none mb-3 tracking-tighter font-semibold">Create New Account</h1>
     <form id="registrationForm" action="/register" method="post">
       <input class="border-2 block mt-3 w-full px-3 py-1" type="text" name="username" placeholder="Username" required>
       <input class="border-2 block mt-3 w-full px-3 py-1" type="text" name="fullname" placeholder="Full Name" required>
@@ -10,13 +10,31 @@
       <span id="emailError" class="text-red-600 hidden">Invalid email address</span>
       <input class="border-2 block mt-3 w-full px-3 py-1" type="tel" name="contact" id="contact" placeholder="Contact" required>
       <span id="contactError" class="text-red-600 hidden">Invalid mobile number</span>
-      <input class="block mt-3 w-full px-3 py-2 bg-red-600 rounded-lg text-white" type="submit" value="Register">
-      <p class="font-semibold text-zinc-700 mt-6 text-center leading-none">By continuing, you agree to Pinterest's terms of service.</p>
+      <input class="block mt-3 w-full px-3 py-2 bg-red-600 rounded-lg text-white hover:bg-red-700" type="submit" value="Register">
+      <p class="font-semibold text-gray-700 mt-6 text-center leading-none">By continuing, you agree to ESE's terms of service.</p>
     </form>
     <a class="inline-block mt-4 text-sm font-semibold w-full text-center text-red-600" href="/">Already have an account</a>
   </div>
 </div>
 <script>
+
+document.addEventListener("DOMContentLoaded", function () {
+            const cartCounter = document.getElementById("cartCounter");
+
+            // Load saved items from local storage
+            const savedItems = JSON.parse(localStorage.getItem("cart")) || [];
+
+            // Function to update the cart counter
+            function updateCartCounter() {
+                cartCounter.textContent = `(${savedItems.length})`; // Update cart counter
+                cartCounter.classList.remove("hidden"); // Make cart counter visible
+            }
+
+            // Initial cart counter update
+            updateCartCounter();
+        });
+
+
 document.getElementById('registrationForm').addEventListener('submit', function(event) {
   // Validate email
   var email = document.getElementById('email').value;
@@ -42,7 +60,3 @@ document.getElementById('registrationForm').addEventListener('submit', function(
 
 </script>
 <% include ./partials/footer.ejs %>
-
-
-
-

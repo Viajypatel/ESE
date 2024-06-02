@@ -1,0 +1,16 @@
+const mongoose = require('mongoose');
+
+const postSchema = new mongoose.Schema({
+  title: String,
+  description: String,
+  category: String,
+  image: String,
+  price: Number,
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+});
+
+postSchema.index({ title: 'text' }); // Add text index for title field
+
+const postModel = mongoose.model('Post', postSchema);
+
+module.exports = postModel;
